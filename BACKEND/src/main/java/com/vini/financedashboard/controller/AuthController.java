@@ -3,9 +3,10 @@ package com.vini.financedashboard.controller;
 import com.vini.financedashboard.dto.UserRegisterRequest;
 import com.vini.financedashboard.dto.UserResponse;
 import com.vini.financedashboard.service.UserService;
-import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/auth")
@@ -18,8 +19,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    @ResponseStatus(HttpStatus.CREATED)
-    public UserResponse register(@RequestBody @Valid UserRegisterRequest request) {
+    public UserResponse register(@RequestBody UserRegisterRequest request) {
         return userService.register(request);
     }
 }
