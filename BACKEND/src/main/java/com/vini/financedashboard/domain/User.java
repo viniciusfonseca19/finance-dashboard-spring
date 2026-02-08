@@ -15,12 +15,10 @@ public class User {
     @Column(unique = true, nullable = false)
     private String email;
 
-    @Column(nullable = false)
     private String password;
 
-    public User() {}
+    // ===== GETTERS =====
 
-    // GETTERS
     public Long getId() {
         return id;
     }
@@ -37,7 +35,8 @@ public class User {
         return password;
     }
 
-    // SETTERS
+    // ===== SETTERS =====
+
     public void setId(Long id) {
         this.id = id;
     }

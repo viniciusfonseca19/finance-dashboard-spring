@@ -2,6 +2,7 @@ package com.vini.financedashboard.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 public class UserRegisterRequest {
 
@@ -13,10 +14,10 @@ public class UserRegisterRequest {
     private String email;
 
     @NotBlank
+    @Size(min = 6)
     private String password;
 
-    public UserRegisterRequest() {}
-
+    // getters e setters
     public String getName() {
         return name;
     }
