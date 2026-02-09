@@ -1,11 +1,8 @@
 package com.vini.financedashboard.controller;
 
-import com.vini.financedashboard.domain.Account;
 import com.vini.financedashboard.service.AccountService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.math.BigDecimal;
 
 @RestController
 @RequestMapping("/accounts")
@@ -18,11 +15,11 @@ public class AccountController {
     }
 
     @PutMapping("/{id}/balance")
-    public ResponseEntity<Account> updateBalance(
+    public ResponseEntity<Void> updateBalance(
             @PathVariable Long id,
-            @RequestParam BigDecimal balance
+            @RequestParam Double balance
     ) {
-        Account updated = accountService.updateBalance(id, balance);
-        return ResponseEntity.ok(updated);
+        accountService.updateBalance(id, balance);
+        return ResponseEntity.noContent().build();
     }
 }
