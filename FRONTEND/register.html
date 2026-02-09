@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="/CSS/style.css">
+</head>
+<body class="auth-container">
+
+    <form class="auth-card" id="registerForm">
+        <h2>Criar conta</h2>
+
+        <input type="text" id="name" placeholder="Nome" required>
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="password" id="password" placeholder="Senha" required>
+
+        <button type="submit">Cadastrar</button>
+
+        <p class="link">
+            Já tem conta? <a href="login.html">Entrar</a>
+        </p>
+
+        <span id="error"></span>
+    </form>
+
+    <script src="auth.js"></script>
+    <script>
+        document.getElementById("registerForm").addEventListener("submit", e => {
+            e.preventDefault();
+
+            const name = name.value;
+            const email = email.value;
+            const password = password.value;
+
+            const result = registerUser(name, email, password);
+
+            if (!result.success) {
+                error.innerText = result.message;
+                return;
+            }
+
+            alert("Conta criada com sucesso!");
+            window.location.href = "login.html";
+        });
+    </script>
+</body>
+</html>

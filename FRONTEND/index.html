@@ -1,31 +1,45 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <title>Finance Dashboard • Login</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="css/style.css" />
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="/CSS/style.css">
 </head>
-<body class="dark">
+<body class="auth-container">
 
-  <div class="login-container">
-    <div class="login-card">
-      <h1>Finance Dashboard</h1>
-      <p>Acesso organizacional</p>
+    <form class="auth-card" id="loginForm">
+        <h2>Login</h2>
 
-      <form id="loginForm">
-        <input type="email" id="email" placeholder="Email" required />
-        <input type="password" id="password" placeholder="Senha" required />
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="password" id="password" placeholder="Senha" required>
 
         <button type="submit">Entrar</button>
-      </form>
 
-      <span class="hint">
-        Não tem conta? <a href="register.html">Cadastrar</a>
-      </span>
-    </div>
-  </div>
+        <p class="link">
+            Não tem conta? <a href="register.html">Cadastrar</a>
+        </p>
 
-  <script src="js/auth.js"></script>
+        <span id="error"></span>
+    </form>
+
+    <script src="auth.js"></script>
+    <script>
+        if (isAuthenticated()) {
+            window.location.href = "dashboard.html";
+        }
+
+        document.getElementById("loginForm").addEventListener("submit", e => {
+            e.preventDefault();
+
+            const result = loginUser(email.value, password.value);
+
+            if (!result.success) {
+                error.innerText = result.message;
+                return;
+            }
+
+            window.location.href = "dashboard.html";
+        });
+    </script>
 </body>
 </html>

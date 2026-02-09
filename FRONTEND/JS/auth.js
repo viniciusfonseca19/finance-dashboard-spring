@@ -1,30 +1,55 @@
-const form = document.getElementById("loginForm");
+// auth.js
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
+function getUsers() {
+    return JSON.parse(localStorage.getItem("users")) || [];
+}
 
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+function saveUsers(users) {
+    localStorage.setItem("users", JSON.stringify(users));
+}
 
-  const credentials = btoa(`${email}:${password}`);
+// REGISTRO
+function registerUser(name, email, password) {
+    const users = getUsers();
 
-  try {
-    const response = await fetch("http://localhost:8080/api/health", {
-      method: "GET",
-      headers: {
-        "Authorization": `Basic ${credentials}`
-      }
-    });
-
-    if (response.ok) {
-      alert("Login realizado com sucesso ✅");
-      window.location.href = "dashboard.html";
-    } else {
-      alert("Email ou senha inválidos ❌");
+    const exists = users.some(user => user.email === email);
+    if (exists) {
+        return { success: false, message: "Usuário já existe" };
     }
 
-  } catch (error) {
-    alert("Erro ao conectar com o servidor");
-    console.error(error);
-  }
-});
+    users.push({
+        name,
+        email,
+        password // no hash
+    });
+
+    saveUsers(users);
+    return { success: true };
+}
+
+// LOGIN
+function loginUser(email, password) {
+    const users = getUsers();
+
+    const user = users.find(
+        u => u.email === email && u.password === password
+    );
+
+    if (!user) {
+        return { success: false, message: "Email ou senha inválidos" };
+    }
+
+    localStorage.setItem("loggedUser", JSON.stringify(user));
+    return { success: true };
+}
+
+// VERIFICA LOGIN
+function isAuthenticated() {
+    return localStorage.getItem("loggedUser") !== null;
+}
+
+// LOGOUT
+function logout() {
+    localStorage.removeItem("loggedUser");
+    window.location.href = "login.html";
+}

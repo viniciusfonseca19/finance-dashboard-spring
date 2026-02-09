@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Finance Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Fonte moderna -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/CSS/style.css">
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <h2 class="logo">Finance</h2>
+
+        <nav>
+            <a class="active">Dashboard</a>
+            <a>Contas</a>
+            <a>Relatórios</a>
+            <a>Configurações</a>
+        </nav>
+
+        <button class="logout" onclick="logout()">Sair</button>
+    </aside>
+
+    <!-- Conteúdo principal -->
+    <div class="main">
+
+        <!-- Topbar -->
+        <header class="topbar">
+            <div>
+                <h1>Dashboard</h1>
+                <span class="subtitle">Visão geral financeira</span>
+            </div>
+
+            <div class="user-info">
+                <span id="userName"></span>
+            </div>
+        </header>
+
+        <!-- Cards -->
+        <section class="cards">
+
+            <div class="card highlight">
+                <span class="card-title">Saldo Atual</span>
+                <h2 id="balance">R$ 0,00</h2>
+
+                <div class="balance-edit">
+                    <input type="number" id="newBalance" placeholder="Novo saldo">
+                    <button onclick="updateBalance()">Atualizar</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="card-title">Status do Sistema</span>
+                <ul class="status-list">
+                    <li>✔ Ambiente Local</li>
+                    <li>✔ Controle Manual</li>
+                    <li>✔ Sem Integrações Externas</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <span class="card-title">Tipo de Organização</span>
+                <p class="card-text">
+                    Plataforma focada em organizações financeiras, com controle direto
+                    e simples de saldos e informações.
+                </p>
+            </div>
+
+        </section>
+
+    </div>
+
+    <script src="auth.js"></script>
+    <script s
