@@ -1,79 +1,75 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Finance Dashboard</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Fonte moderna -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Seu CSS -->
+  <link rel="stylesheet" href="/CSS/dashboard.css">
 
-    <link rel="stylesheet" href="/CSS/style.css">
+  <!-- Fonte opcional (profissional) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- Sidebar -->
-    <aside class="sidebar">
-        <h2 class="logo">Finance</h2>
+  <div class="dashboard-container">
 
-        <nav>
-            <a class="active">Dashboard</a>
-            <a>Contas</a>
-            <a>Relatórios</a>
-            <a>Configurações</a>
-        </nav>
+    <!-- HEADER -->
+    <header class="dashboard-header">
+      <h1>Dashboard Financeiro</h1>
+      <p>Controle simples e rápido do seu saldo</p>
+    </header>
 
-        <button class="logout" onclick="logout()">Sair</button>
-    </aside>
+    <!-- CARD SALDO -->
+    <section class="card balance-card">
+      <span class="card-title">Saldo Atual</span>
+      <span id="currentBalance" class="balance-value">R$ 0,00</span>
+    </section>
 
-    <!-- Conteúdo principal -->
-    <div class="main">
+    <!-- ATUALIZAR SALDO -->
+    <section class="card update-card">
+      <h2>Atualizar saldo</h2>
 
-        <!-- Topbar -->
-        <header class="topbar">
-            <div>
-                <h1>Dashboard</h1>
-                <span class="subtitle">Visão geral financeira</span>
-            </div>
+      <div class="form-group">
+        <label for="newBalance">Novo saldo</label>
+        <input
+          type="number"
+          id="newBalance"
+          placeholder="Ex: 1500"
+        >
+      </div>
 
-            <div class="user-info">
-                <span id="userName"></span>
-            </div>
-        </header>
+      <button id="updateBalanceBtn" class="primary-btn">
+        Atualizar saldo
+      </button>
+    </section>
 
-        <!-- Cards -->
-        <section class="cards">
+    <!-- TRANSAÇÕES (OPCIONAL / JÁ PREPARADO PRO JS PLUS) -->
+    <section class="card transaction-card">
+      <h2>Adicionar transação</h2>
 
-            <div class="card highlight">
-                <span class="card-title">Saldo Atual</span>
-                <h2 id="balance">R$ 0,00</h2>
+      <div class="form-row">
+        <input
+          type="number"
+          id="amount"
+          placeholder="Valor"
+        >
 
-                <div class="balance-edit">
-                    <input type="number" id="newBalance" placeholder="Novo saldo">
-                    <button onclick="updateBalance()">Atualizar</button>
-                </div>
-            </div>
+        <select id="type">
+          <option value="income">Entrada</option>
+          <option value="expense">Saída</option>
+        </select>
+      </div>
 
-            <div class="card">
-                <span class="card-title">Status do Sistema</span>
-                <ul class="status-list">
-                    <li>✔ Ambiente Local</li>
-                    <li>✔ Controle Manual</li>
-                    <li>✔ Sem Integrações Externas</li>
-                </ul>
-            </div>
+      <button id="addTransactionBtn" class="secondary-btn">
+        Adicionar
+      </button>
+    </section>
 
-            <div class="card">
-                <span class="card-title">Tipo de Organização</span>
-                <p class="card-text">
-                    Plataforma focada em organizações financeiras, com controle direto
-                    e simples de saldos e informações.
-                </p>
-            </div>
+  </div>
 
-        </section>
-
-    </div>
-
-    <script src="auth.js"></script>
-    <script s
+  <!-- JS -->
+  <script src="/JS/dashboard.js"></script>
+</body>
+</html>

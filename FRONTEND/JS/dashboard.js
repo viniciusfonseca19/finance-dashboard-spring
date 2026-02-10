@@ -1,40 +1,19 @@
-// ===== DASHBOARD.JS =====
+document.addEventListener("DOMContentLoaded", () => {
+  const currentBalanceEl = document.getElementById("currentBalance");
+  const newBalanceInput = document.getElementById("newBalance");
+  const updateBalanceBtn = document.getElementById("updateBalanceBtn");
 
-// Saldo inicial
-let balance = 0;
+  updateBalanceBtn.addEventListener("click", () => {
+    const value = Number(newBalanceInput.value);
 
-// Elementos
-const balanceEl = document.getElementById("currentBalance");
-const newBalanceInput = document.getElementById("newBalance");
-const updateBtn = document.getElementById("updateBalanceBtn");
+    if (isNaN(value) || newBalanceInput.value.trim() === "") {
+      alert("Digite um valor válido");
+      return;
+    }
 
-// Formata para Real (BR)
-function formatCurrency(value) {
-  return value.toLocaleString("pt-BR", {
-    style: "currency",
-    currency: "BRL"
+    currentBalanceEl.textContent =
+      `R$ ${value.toFixed(2).replace(".", ",")}`;
+
+    newBalanceInput.value = "";
   });
-}
-
-// Atualiza o saldo na tela
-function renderBalance() {
-  balanceEl.textContent = formatCurrency(balance);
-}
-
-// Evento do botão
-updateBtn.addEventListener("click", () => {
-  const value = parseFloat(newBalanceInput.value);
-
-  if (isNaN(value)) {
-    alert("Digite um valor válido!");
-    return;
-  }
-
-  balance = value;
-  renderBalance();
-
-  newBalanceInput.value = "";
 });
-
-// Inicializa
-renderBalance();
