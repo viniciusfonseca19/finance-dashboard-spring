@@ -14,16 +14,21 @@ function registerUser(name, email, password) {
 
     const exists = users.some(user => user.email === email);
     if (exists) {
-        return { success: false, message: "Usuário já existe" };
+        return { success: false, message: "Usuário já cadastrado. Faça login." };
     }
 
-    users.push({
+    const newUser = {
         name,
         email,
-        password // no hash
-    });
+        password,
+        balance: 0,
+        transactions: []
+    };
 
+    users.push(newUser);
     saveUsers(users);
+
+    localStorage.setItem("loggedUser", JSON.stringify(newUser));
     return { success: true };
 }
 
@@ -31,24 +36,36 @@ function registerUser(name, email, password) {
 function loginUser(email, password) {
     const users = getUsers();
 
-    const userExists = users.find(u => u.email === email);
+    const user = users.find(
+        u => u.email === email && u.password === password
+    );
 
-    if (!userExists) {
+    if (!user) {
         return {
             success: false,
-            message: "Usuário não encontrado. Faça o cadastro primeiro."
+            message: "Usuário não encontrado. Cadastre-se primeiro."
         };
     }
 
-    if (userExists.password !== password) {
-        return {
-            success: false,
-            message: "Senha incorreta."
-        };
-    }
-
-    localStorage.setItem("loggedUser", JSON.stringify(userExists));
+    localStorage.setItem("loggedUser", JSON.stringify(user));
     return { success: true };
+}
+
+// USUÁRIO LOGADO
+function getLoggedUser() {
+    return JSON.parse(localStorage.getItem("loggedUser"));
+}
+
+// ATUALIZA USUÁRIO
+function updateLoggedUser(updatedUser) {
+    let users = getUsers();
+
+    users = users.map(u =>
+        u.email === updatedUser.email ? updatedUser : u
+    );
+
+    saveUsers(users);
+    localStorage.setItem("loggedUser", JSON.stringify(updatedUser));
 }
 
 // VERIFICA LOGIN

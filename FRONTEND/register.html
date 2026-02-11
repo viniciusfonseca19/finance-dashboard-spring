@@ -8,7 +8,7 @@
 <body class="auth-container">
 
     <form class="auth-card" id="registerForm">
-        <h2>Criar conta</h2>
+        <h2>Cadastrar</h2>
 
         <input type="text" id="name" placeholder="Nome" required>
         <input type="email" id="email" placeholder="Email" required>
@@ -17,31 +17,34 @@
         <button type="submit">Cadastrar</button>
 
         <p class="link">
-            Já tem conta? <a href="index.html">Entrar</a>
+            Já tem conta? <a href="login.html">Entrar</a>
         </p>
 
         <span id="error"></span>
     </form>
 
-    <script src="auth.js"></script>
+    <script src="/JS/auth.js"></script>
     <script>
-        document.getElementById("registerForm").addEventListener("submit", e => {
+        const registerForm = document.getElementById("registerForm");
+        const error = document.getElementById("error");
+
+        registerForm.addEventListener("submit", e => {
             e.preventDefault();
 
-            const name = name.value;
-            const email = email.value;
-            const password = password.value;
-
-            const result = registerUser(name, email, password);
+            const result = registerUser(
+                name.value,
+                email.value,
+                password.value
+            );
 
             if (!result.success) {
                 error.innerText = result.message;
                 return;
             }
 
-            alert("Conta criada com sucesso!");
-            window.location.href = "login.html";
+            window.location.href = "dashboard.html";
         });
     </script>
+
 </body>
 </html>
