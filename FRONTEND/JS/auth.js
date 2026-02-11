@@ -31,15 +31,23 @@ function registerUser(name, email, password) {
 function loginUser(email, password) {
     const users = getUsers();
 
-    const user = users.find(
-        u => u.email === email && u.password === password
-    );
+    const userExists = users.find(u => u.email === email);
 
-    if (!user) {
-        return { success: false, message: "Email ou senha inválidos" };
+    if (!userExists) {
+        return {
+            success: false,
+            message: "Usuário não encontrado. Faça o cadastro primeiro."
+        };
     }
 
-    localStorage.setItem("loggedUser", JSON.stringify(user));
+    if (userExists.password !== password) {
+        return {
+            success: false,
+            message: "Senha incorreta."
+        };
+    }
+
+    localStorage.setItem("loggedUser", JSON.stringify(userExists));
     return { success: true };
 }
 
